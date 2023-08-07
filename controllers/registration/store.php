@@ -45,7 +45,15 @@ else
         'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
 
+    $user=$db->query('select * from users where email = :email', [
+        'email' => $email,
+       
+        ])->find();
+    
+      $_SESSION['id']=$user['id'];
+
     login([
+        'id' => $_SESSION['id'],
         'email' => $email
     ]);
 

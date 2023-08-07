@@ -34,11 +34,14 @@ $user=$db->query('select * from users where email = :email', [
    
     ])->find();
 
+  $_SESSION['id']=$user['id'];
+
     if ($user) {
         if (password_verify($password, $user['password'])) {
             login([
+                'id' => $_SESSION['id'],
                 'email' => $email,
-               
+                
                 
             ]);
     
